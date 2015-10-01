@@ -13,5 +13,6 @@
             "Wneto\\UserAgentBundle": ""
         }
     },
+    "target-dir": "Wneto/UserAgentBundle",
     "require": {}
 }

@@ -26,11 +26,11 @@ class UserAgentValidator
     public function isAllowed($userAgentHeader)
     {
         $agentList = $this->getAgentListFromUserAgentHeader($userAgentHeader);
-        foreach($agentList as $agent) {
+        foreach ($agentList as $agent) {
             $separatedAgent = $this->splitAgent($agent);
-            foreach($this->configurationParser->getPatterns() as $pattern) {
-                if(in_array($pattern->getPattern(), $separatedAgent) && $pattern->isAllowed() == true) {
-                    if(isset($separatedAgent[1])){
+            foreach ($this->configurationParser->getPatterns() as $pattern) {
+                if (in_array($pattern->getPattern(), $separatedAgent) && $pattern->isAllowed() == true) {
+                    if (isset($separatedAgent[1])) {
                         return version_compare($separatedAgent[1], $pattern->getVersion(), $pattern->getOperator());
                     }
                 }

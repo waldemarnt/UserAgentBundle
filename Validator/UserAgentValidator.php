@@ -88,6 +88,7 @@ class UserAgentValidator
 
         return false;
     }
+
     /**
      * @param $userAgentHeader
      * @return array

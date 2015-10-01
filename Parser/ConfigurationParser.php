@@ -30,14 +30,14 @@ class ConfigurationParser
     public function __construct($configuration)
     {
         $this->configuration = $configuration;
-        $this->enabled  = $this->configuration['user_agent_validation'];
+        $this->enabled = $this->configuration['user_agent_validation'];
         $this->patterns = $this->hidrateEntities($this->configuration['user_agent_patterns']);
     }
 
     private function hidrateEntities($user_agent_patterns)
     {
         $patterns = [];
-        foreach($user_agent_patterns as $pattern) {
+        foreach ($user_agent_patterns as $pattern) {
             $patternEntity = new Pattern();
             $patternEntity->setPattern($pattern['pattern']);
             $patternEntity->setAllowed($pattern['allowed']);
@@ -96,7 +96,4 @@ class ConfigurationParser
     {
         $this->enabled = $enabled;
     }
-
-
-
 }

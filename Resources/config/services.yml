@@ -1,0 +1,7 @@
+services:
+    user_agent.parser.configuration_parser:
+        class: Wneto\UserAgentBundle\Parser\ConfigurationParser
+        arguments: [%wneto_user_agent%]
+    user_agent.validator.user_agent:
+        class: Wneto\UserAgentBundle\Validator\UserAgentValidator
+        arguments: [@user_agent.parser.configuration_parser]

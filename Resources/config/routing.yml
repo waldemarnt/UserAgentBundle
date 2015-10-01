@@ -1,0 +1,3 @@
+wneto_user_agent_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: WnetoUserAgentBundle:Default:index }

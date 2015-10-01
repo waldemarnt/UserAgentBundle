@@ -1,0 +1,17 @@
+{
+    "name": "waldemarnt/user-agent-bundle",
+    "description": "bundle to handle header user-agent versions",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Waldemar Neto",
+            "email": "waldemarnt@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Wneto\\UserAgentBundle": ""
+        }
+    },
+    "require": {}
+}

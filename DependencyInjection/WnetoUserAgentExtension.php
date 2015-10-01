@@ -24,7 +24,5 @@ class WnetoUserAgentExtension extends Extension
         $container->setParameter('wneto_user_agent', $config);
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-
     }
-
 }

@@ -9,7 +9,7 @@ The list is separated by kind.
 
 
 ### Installation
-Add your composer dependency
+Add it as dependency in your composer.json
 ```json
     "require": {
         "waldemarnt/user-agent-bundle": "1.*"

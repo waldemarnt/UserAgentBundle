@@ -37,7 +37,7 @@ wneto_user_agent:
     user_agent_patterns:
         - { pattern: "Mozilla", allowed: true, version: "5.0", operator: ">" }
 ```
-Lets undestand,
+Lets understand,
 pattern is the name of the agent, the name is before the **/** bar in the agent, **allowed** is a boolean and the **version** will be the version that you need set the rule, the **operator** is used to applicate the rule for example higher than **>** higher of equals than **>=** the same in inverse **<** , **<=**
 
 Ok now in our application we just need add a verification like this one:

@@ -2,10 +2,8 @@
 
 namespace Wneto\UserAgentBundle\Entity;
 
-
 class Pattern
 {
-
     private $pattern;
 
     private $allowed = false;
@@ -77,7 +75,4 @@ class Pattern
     {
         $this->operator = $operator;
     }
-
-
-
 }

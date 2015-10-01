@@ -36,9 +36,9 @@ class UserAgentValidator
      */
     public function checkIfListHaveAgentAllowed($agentList)
     {
-        foreach($agentList as $agent) {
+        foreach ($agentList as $agent) {
             $separatedAgent = $this->splitAgent($agent);
-            if($this->isPatternAllowed($separatedAgent)) {
+            if ($this->isPatternAllowed($separatedAgent)) {
                 return true;
             }
         }
@@ -52,8 +52,8 @@ class UserAgentValidator
      */
     public function isPatternAllowed($separatedAgent)
     {
-        foreach($this->configurationParser->getPatterns() as $pattern) {
-            if($this->isAbleToCompare($pattern, $separatedAgent)) {
+        foreach ($this->configurationParser->getPatterns() as $pattern) {
+            if ($this->isAbleToCompare($pattern, $separatedAgent)) {
                 return $this->compare($pattern, $separatedAgent);
             }
         }
@@ -68,7 +68,7 @@ class UserAgentValidator
      */
     public function isAbleToCompare($pattern, $separatedAgent)
     {
-        if(in_array($pattern->getPattern(), $separatedAgent) && $pattern->isAllowed() == true) {
+        if (in_array($pattern->getPattern(), $separatedAgent) && $pattern->isAllowed() == true) {
             return true;
         }
 
@@ -82,7 +82,7 @@ class UserAgentValidator
      */
     public function compare($pattern, $separatedAgent)
     {
-        if(isset($separatedAgent[1])){
+        if (isset($separatedAgent[1])) {
             return version_compare($separatedAgent[1], $pattern->getVersion(), $pattern->getOperator());
         }
 

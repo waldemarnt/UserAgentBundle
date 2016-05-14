@@ -1,0 +1,5 @@
+wneto_user_agent:
+    validation: true
+    type: whitelist
+    patterns:
+        - { pattern: "Mozilla", version: "4.0.0", operator: ">" }

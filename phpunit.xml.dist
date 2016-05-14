@@ -6,18 +6,13 @@
          backupGlobals="false"
          colors="true"
          bootstrap="vendor/autoload.php"
+         coverageHtml="html/"
 >
     <testsuites>
         <testsuite name="Project Test Suite">
             <directory>./Tests</directory>
         </testsuite>
     </testsuites>
-
-    <!--
-    <php>
-        <server name="KERNEL_DIR" value="/path/to/your/app/" />
-    </php>
-    -->
 
     <filter>
         <whitelist>

@@ -14,17 +14,18 @@ use Wneto\UserAgentBundle\Parser\ConfigurationParser;
 class ConfigurationParserTest extends \PHPUnit_Framework_TestCase
 {
     protected $configuration = [
-        'validation' => true,
+        'enabled' => true,
         'type' => 'whitelist',
         'patterns' => [
             [
                 'pattern' => 'Mozilla',
                 'version' => '5.0.5',
                 'operator' => '>'
-            ]
+            ],
         ]
     ];
 
+    /** @var ConfigurationParser $parser */
     protected $parser;
 
 
@@ -34,9 +35,19 @@ class ConfigurationParserTest extends \PHPUnit_Framework_TestCase
         $this->parser = new ConfigurationParser($this->configuration);
     }
 
+    public function testGetValidation()
+    {
+        $this->assertEquals($this->configuration['enabled'], $this->parser->isEnabled());
+    }
+
     public function testGetType()
     {
         $this->assertEquals($this->configuration['type'], $this->parser->getType());
+    }
+
+    public function testPatterns()
+    {
+        $this->assertInstanceOf('Wneto\\UserAgentBundle\\Entity\\Pattern', $this->parser->getPatterns()[0]);
     }
 
 }

@@ -32,10 +32,11 @@ This example was did using POSTMAN, well, lets suppose that i need receive only 
 Kepp calm, lets do it!
 First of all we need the configuration inside the **config.yml** file
 ```yml
+# you can found a sample inside Wneto/UserAgentBundle/Resources/samples/config/user_agent.yml
 wneto_user_agent:
-    user_agent_validation: true
-    user_agent_type: whitelist # blacklist or whitelist. With whitelist all request will be blocked and accept requests only from the setted patterns
-    user_agent_patterns:
+    validation: true
+    type: whitelist # blacklist or whitelist. With whitelist all request will be blocked and accept requests only from the setted patterns
+    patterns:
         - { pattern: "Mozilla", version: "5.0", operator: ">" }
 ```
 Lets understand,

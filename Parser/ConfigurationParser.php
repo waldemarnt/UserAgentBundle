@@ -32,13 +32,17 @@ class ConfigurationParser
         $this->configuration = $configuration;
         $this->enabled = $this->configuration['user_agent_validation'];
         $this->type = $this->configuration['user_agent_type'];
-        $this->patterns = $this->hidrateEntities($this->configuration['user_agent_patterns']);
+        $this->patterns = $this->hydrateEntities($this->configuration['user_agent_patterns']);
     }
 
-    private function hidrateEntities($user_agent_patterns)
+    /**
+     * @param array $userAgentPatterns
+     * @return array
+     */
+    private function hydrateEntities($userAgentPatterns)
     {
         $patterns = [];
-        foreach ($user_agent_patterns as $pattern) {
+        foreach ($userAgentPatterns as $pattern) {
             $patternEntity = new Pattern();
             $patternEntity->setPattern($pattern['pattern']);
             $patternEntity->setOperator($pattern['operator']);

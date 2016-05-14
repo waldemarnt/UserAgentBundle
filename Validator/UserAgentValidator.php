@@ -2,6 +2,9 @@
 
 namespace Wneto\UserAgentBundle\Validator;
 
+use Wneto\UserAgentBundle\Compare\CompareAllowAll;
+use Wneto\UserAgentBundle\Compare\CompareBlockAll;
+use Wneto\UserAgentBundle\Compare\CompareStrategy;
 use Wneto\UserAgentBundle\Parser\ConfigurationParser;
 
 class UserAgentValidator
@@ -11,12 +14,18 @@ class UserAgentValidator
      */
     private $configurationParser;
 
+    /** @var CompareBlockAll|CompareAllowAll compareStrategy */
+    private $compareStrategy;
+
     /**
      * @param ConfigurationParser $configurationParser
+     * @param CompareStrategy $compareStrategy
      */
-    public function __construct(ConfigurationParser $configurationParser)
+    public function __construct(ConfigurationParser $configurationParser, CompareStrategy $compareStrategy)
     {
         $this->configurationParser = $configurationParser;
+        /** @var CompareBlockAll|CompareAllowAll compareStrategy */
+        $this->compareStrategy = $compareStrategy->init();
     }
 
     /**
@@ -38,52 +47,9 @@ class UserAgentValidator
     {
         foreach ($agentList as $agent) {
             $separatedAgent = $this->splitAgent($agent);
-            if ($this->isPatternAllowed($separatedAgent)) {
+            if ($this->compareStrategy->isPatternAllowed($separatedAgent)) {
                 return true;
             }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $separatedAgent
-     * @return bool|mixed
-     */
-    public function isPatternAllowed($separatedAgent)
-    {
-        foreach ($this->configurationParser->getPatterns() as $pattern) {
-            if ($this->isAbleToCompare($pattern, $separatedAgent)) {
-                return $this->compare($pattern, $separatedAgent);
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $pattern
-     * @param $separatedAgent
-     * @return bool
-     */
-    public function isAbleToCompare($pattern, $separatedAgent)
-    {
-        if (in_array($pattern->getPattern(), $separatedAgent) && $pattern->isAllowed() == true) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $pattern
-     * @param $separatedAgent
-     * @return bool|mixed
-     */
-    public function compare($pattern, $separatedAgent)
-    {
-        if (isset($separatedAgent[1])) {
-            return version_compare($separatedAgent[1], $pattern->getVersion(), $pattern->getOperator());
         }
 
         return false;

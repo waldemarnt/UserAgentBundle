@@ -12,7 +12,7 @@ The list is separated by kind.
 Add it as dependency in your composer.json
 ```json
     "require": {
-        "waldemarnt/user-agent-bundle": "1.*"
+        "waldemarnt/user-agent-bundle": "2.*"
     }
 ```
 
@@ -34,8 +34,9 @@ First of all we need the configuration inside the **config.yml** file
 ```yml
 wneto_user_agent:
     user_agent_validation: true
+    user_agent_type: whitelist # blacklist or whitelist. With whitelist all request will be blocked and accept requests only from the setted patterns
     user_agent_patterns:
-        - { pattern: "Mozilla", allowed: true, version: "5.0", operator: ">" }
+        - { pattern: "Mozilla", version: "5.0", operator: ">" }
 ```
 Lets understand,
 pattern is the name of the agent, the name is before the **/** bar in the agent, **allowed** is a boolean and the **version** will be the version that you need set the rule, the **operator** is used to applicate the rule for example higher than **>** higher of equals than **>=** the same in inverse **<** , **<=**

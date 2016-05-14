@@ -13,6 +13,9 @@
             "Wneto\\UserAgentBundle": ""
         }
     },
+    "autoload-dev": {
+        "psr-0": {"Wneto\\UserAgentBundle": "Tests"}
+    },
     "target-dir": "Wneto/UserAgentBundle",
     "require": {}
 }

@@ -13,7 +13,7 @@ class ConfigurationParser
     private $configuration;
 
     /**
-     * @var
+     * @var array
      */
     private $patterns;
 
@@ -30,9 +30,9 @@ class ConfigurationParser
     public function __construct($configuration)
     {
         $this->configuration = $configuration;
-        $this->enabled = $this->configuration['user_agent_validation'];
-        $this->type = $this->configuration['user_agent_type'];
-        $this->patterns = $this->hydrateEntities($this->configuration['user_agent_patterns']);
+        $this->enabled = $this->configuration['validation'];
+        $this->type = $this->configuration['type'];
+        $this->patterns = $this->hydrateEntities($this->configuration['patterns']);
     }
 
     /**

@@ -6,8 +6,6 @@ class Pattern
 {
     private $pattern;
 
-    private $allowed = false;
-
     private $version;
 
     private $operator;
@@ -26,22 +24,6 @@ class Pattern
     public function setPattern($pattern)
     {
         $this->pattern = $pattern;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isAllowed()
-    {
-        return $this->allowed;
-    }
-
-    /**
-     * @param boolean $allowed
-     */
-    public function setAllowed($allowed)
-    {
-        $this->allowed = $allowed;
     }
 
     /**
@@ -75,4 +57,5 @@ class Pattern
     {
         $this->operator = $operator;
     }
+
 }

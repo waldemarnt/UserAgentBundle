@@ -24,13 +24,16 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('user_agent_validation')->isRequired()->defaultFalse()->end()
         ->end();
 
+        $rootNode->children()
+            ->scalarNode('user_agent_type')->isRequired()->defaultValue('whitelist')->end()
+            ->end();
+
         $rootNode
             ->children()
                 ->arrayNode('user_agent_patterns')
                     ->prototype('array')
                         ->children()
                             ->scalarNode('pattern')->isRequired()->end()
-                            ->booleanNode('allowed')->defaultFalse()->isRequired()->end()
                             ->scalarNode('version')->isRequired()->end()
                             ->scalarNode('operator')->isRequired()->end()
                         ->end()

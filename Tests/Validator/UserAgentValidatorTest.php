@@ -22,21 +22,49 @@ class UserAgentValidatorTest extends \PHPUnit_Framework_TestCase
     /** @var ConfigurationParser $parser */
     protected $parser;
 
-    /** @var CompareStrategy $compareStrategy */
-    private $compareStrategy;
-
     public function setUp()
     {
         $mock = new ConfigurationMock();
         $this->configuration = $mock->getMockConfig();
         $this->parser = new ConfigurationParser($this->configuration);
-        $this->compareStrategy = new CompareStrategy($this->parser);
     }
 
     public function testIsAllowed()
     {
-        $userAgentValidator = new UserAgentValidator($this->parser, $this->compareStrategy);
+        $compareStrategy = new CompareStrategy($this->parser);
+        $userAgentValidator = new UserAgentValidator($this->parser, $compareStrategy);
         $this->assertTrue($userAgentValidator->isAllowed($this->userAgentHeader), "It's allowed");
+
+        $mock = new ConfigurationMock();
+        $configuration = $mock->getMockConfig();
+        $configuration['patterns'][0]['version'] = '7.0.0';
+        $parser = new ConfigurationParser($configuration);
+        $compareStrategy = new CompareStrategy($parser);
+        $userAgentValidator = new UserAgentValidator($parser, $compareStrategy);
+        $this->assertFalse($userAgentValidator->isAllowed($this->userAgentHeader), "It's not allowed");
+
+        $mock = new ConfigurationMock();
+        $configuration = $mock->getMockConfig();
+        $configuration['patterns'][0]['pattern'] = null;
+        $parser = new ConfigurationParser($configuration);
+        $compareStrategy = new CompareStrategy($parser);
+        $userAgentValidator = new UserAgentValidator($parser, $compareStrategy);
+        $this->assertFalse($userAgentValidator->isAllowed($this->userAgentHeader), "It's not allowed");
     }
 
+    public function testIsEnabled()
+    {
+        $compareStrategy = new CompareStrategy($this->parser);
+        /** @var UserAgentValidator $userAgentValidator */
+        $userAgentValidator = new UserAgentValidator($this->parser, $compareStrategy);
+        $this->assertTrue($userAgentValidator->isEnabled(), "It's enabled");
+
+        $mock = new ConfigurationMock();
+        $configuration = $mock->getMockConfig();
+        $configuration['enabled'] = false;
+        $parser = new ConfigurationParser($configuration);
+        $compareStrategy = new CompareStrategy($parser);
+        $userAgentValidator = new UserAgentValidator($parser, $compareStrategy);
+        $this->assertFalse($userAgentValidator->isEnabled(), "It's not enabled");
+    }
 }

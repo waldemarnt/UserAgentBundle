@@ -2,6 +2,8 @@
 
 namespace Wneto\UserAgentBundle\Entity;
 
+use Wneto\UserAgentBundle\Compare\Validator\VersionCompareOperatorsValidator;
+
 class Pattern
 {
     private $pattern;
@@ -9,6 +11,13 @@ class Pattern
     private $version;
 
     private $operator;
+
+    private $operatorValidator;
+
+    public function __construct()
+    {
+        $this->operatorValidator = new VersionCompareOperatorsValidator();
+    }
 
     /**
      * @return mixed
@@ -55,7 +64,9 @@ class Pattern
      */
     public function setOperator($operator)
     {
-        $this->operator = $operator;
+        if ($this->operatorValidator->validate($operator)) {
+            $this->operator = $operator;
+        }
     }
 
 }

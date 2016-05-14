@@ -43,7 +43,7 @@ class UserAgentValidator
      * @param $agentList
      * @return bool
      */
-    public function checkIfListHaveAgentAllowed($agentList)
+    protected function checkIfListHaveAgentAllowed($agentList)
     {
         foreach ($agentList as $agent) {
             $separatedAgent = $this->splitAgent($agent);

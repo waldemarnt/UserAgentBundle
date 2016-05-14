@@ -13,14 +13,14 @@ class ConfigurationParser
     private $configuration;
 
     /**
-     * @var
+     * @var array
      */
     private $patterns;
 
     /**
-     * @var
+     * @var String
      */
-    private $whiteList;
+    private $type;
 
     /**
      * @boolean
@@ -30,17 +30,21 @@ class ConfigurationParser
     public function __construct($configuration)
     {
         $this->configuration = $configuration;
-        $this->enabled = $this->configuration['user_agent_validation'];
-        $this->patterns = $this->hidrateEntities($this->configuration['user_agent_patterns']);
+        $this->enabled = $this->configuration['validation'];
+        $this->type = $this->configuration['type'];
+        $this->patterns = $this->hydrateEntities($this->configuration['patterns']);
     }
 
-    private function hidrateEntities($user_agent_patterns)
+    /**
+     * @param array $userAgentPatterns
+     * @return array
+     */
+    private function hydrateEntities($userAgentPatterns)
     {
         $patterns = [];
-        foreach ($user_agent_patterns as $pattern) {
+        foreach ($userAgentPatterns as $pattern) {
             $patternEntity = new Pattern();
             $patternEntity->setPattern($pattern['pattern']);
-            $patternEntity->setAllowed($pattern['allowed']);
             $patternEntity->setOperator($pattern['operator']);
             $patternEntity->setVersion($pattern['version']);
             $patterns[] = $patternEntity;
@@ -68,22 +72,6 @@ class ConfigurationParser
     /**
      * @return mixed
      */
-    public function getWhiteList()
-    {
-        return $this->whiteList;
-    }
-
-    /**
-     * @param mixed $whiteList
-     */
-    public function setWhiteList($whiteList)
-    {
-        $this->whiteList = $whiteList;
-    }
-
-    /**
-     * @return mixed
-     */
     public function isEnabled()
     {
         return $this->enabled;
@@ -95,5 +83,21 @@ class ConfigurationParser
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 }

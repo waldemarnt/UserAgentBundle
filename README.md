@@ -12,7 +12,7 @@ The list is separated by kind.
 Add it as dependency in your composer.json
 ```json
     "require": {
-        "waldemarnt/user-agent-bundle": "1.*"
+        "waldemarnt/user-agent-bundle": "2.*"
     }
 ```
 
@@ -32,10 +32,12 @@ This example was did using POSTMAN, well, lets suppose that i need receive only 
 Kepp calm, lets do it!
 First of all we need the configuration inside the **config.yml** file
 ```yml
+# you can found a sample inside Wneto/UserAgentBundle/Resources/samples/config/user_agent.yml
 wneto_user_agent:
-    user_agent_validation: true
-    user_agent_patterns:
-        - { pattern: "Mozilla", allowed: true, version: "5.0", operator: ">" }
+    validation: true
+    type: whitelist # blacklist or whitelist. With whitelist all request will be blocked and accept requests only from the setted patterns
+    patterns:
+        - { pattern: "Mozilla", version: "5.0", operator: ">" }
 ```
 Lets understand,
 pattern is the name of the agent, the name is before the **/** bar in the agent, **allowed** is a boolean and the **version** will be the version that you need set the rule, the **operator** is used to applicate the rule for example higher than **>** higher of equals than **>=** the same in inverse **<** , **<=**

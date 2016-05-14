@@ -21,16 +21,19 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('wneto_user_agent');
 
         $rootNode->children()
-            ->booleanNode('user_agent_validation')->isRequired()->defaultFalse()->end()
+            ->booleanNode('validation')->isRequired()->defaultFalse()->end()
         ->end();
+
+        $rootNode->children()
+            ->scalarNode('type')->isRequired()->defaultValue('whitelist')->end()
+            ->end();
 
         $rootNode
             ->children()
-                ->arrayNode('user_agent_patterns')
+                ->arrayNode('patterns')
                     ->prototype('array')
                         ->children()
                             ->scalarNode('pattern')->isRequired()->end()
-                            ->booleanNode('allowed')->defaultFalse()->isRequired()->end()
                             ->scalarNode('version')->isRequired()->end()
                             ->scalarNode('operator')->isRequired()->end()
                         ->end()

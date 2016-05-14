@@ -2,15 +2,22 @@
 
 namespace Wneto\UserAgentBundle\Entity;
 
+use Wneto\UserAgentBundle\Compare\Validator\VersionCompareOperatorsValidator;
+
 class Pattern
 {
     private $pattern;
 
-    private $allowed = false;
-
     private $version;
 
     private $operator;
+
+    private $operatorValidator;
+
+    public function __construct()
+    {
+        $this->operatorValidator = new VersionCompareOperatorsValidator();
+    }
 
     /**
      * @return mixed
@@ -26,22 +33,6 @@ class Pattern
     public function setPattern($pattern)
     {
         $this->pattern = $pattern;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isAllowed()
-    {
-        return $this->allowed;
-    }
-
-    /**
-     * @param boolean $allowed
-     */
-    public function setAllowed($allowed)
-    {
-        $this->allowed = $allowed;
     }
 
     /**
@@ -73,6 +64,9 @@ class Pattern
      */
     public function setOperator($operator)
     {
-        $this->operator = $operator;
+        if ($this->operatorValidator->validate($operator)) {
+            $this->operator = $operator;
+        }
     }
+
 }

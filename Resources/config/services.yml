@@ -4,4 +4,7 @@ services:
         arguments: [%wneto_user_agent%]
     user_agent.validator.user_agent:
         class: Wneto\UserAgentBundle\Validator\UserAgentValidator
-        arguments: [@user_agent.parser.configuration_parser]
+        arguments: [@user_agent.parser.configuration_parser, @user_agent.compare.strategy]
+    user_agent.compare.strategy:
+          class: Wneto\UserAgentBundle\Compare\CompareStrategy
+          arguments: [@user_agent.parser.configuration_parser]

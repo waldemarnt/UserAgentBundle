@@ -34,7 +34,7 @@ First of all we need the configuration inside the **config.yml** file
 ```yml
 # you can found a sample inside Wneto/UserAgentBundle/Resources/samples/config/user_agent.yml
 wneto_user_agent:
-    validation: true
+    enabled: true
     type: whitelist # blacklist or whitelist. With whitelist all request will be blocked and accept requests only from the setted patterns
     patterns:
         - { pattern: "Mozilla", version: "5.0", operator: ">" }

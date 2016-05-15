@@ -21,6 +21,7 @@ class ConfigurationParserTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        parent::setUp();
         $mock = new ConfigurationMock();
         $this->configuration = $mock->getMockConfig();
         $this->parser = new ConfigurationParser($this->configuration);

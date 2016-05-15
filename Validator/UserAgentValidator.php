@@ -58,13 +58,9 @@ class UserAgentValidator
      */
     protected function getAgentFromUserAgentHeader($userAgentHeader)
     {
-        $exploded = explode(' ', $userAgentHeader);
-        $agent = explode('/', $exploded[0]);
+        $agents = explode(' ', $userAgentHeader);
 
-        return [
-            $agent[0],
-            $agent[1]
-        ];
+        return explode('/', $agents[0]);
     }
 
     /**

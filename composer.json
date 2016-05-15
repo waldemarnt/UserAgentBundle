@@ -17,5 +17,15 @@
         "psr-0": {"Wneto\\UserAgentBundle": "Tests"}
     },
     "target-dir": "Wneto/UserAgentBundle",
-    "require": {}
+    "require": {
+        "cbschuld/browser": "dev-master"
+    },
+    "repositories":
+    [
+        {
+            "name": "cbschuld/browser",
+            "type": "vcs",
+            "url": "git@github.com:luzzardi/Browser.php.git"
+        }
+    ]
 }

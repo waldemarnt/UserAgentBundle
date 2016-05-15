@@ -30,9 +30,9 @@ class ConfigurationParser
     public function __construct($configuration)
     {
         $this->configuration = $configuration;
-        $this->enabled = $this->configuration['enabled'];
-        $this->type = $this->configuration['type'];
-        $this->patterns = $this->hydrateEntities($this->configuration['patterns']);
+        $this->setEnabled($this->configuration['enabled']);
+        $this->setType($this->configuration['type']);
+        $this->setPatterns($this->hydrateEntities($this->configuration['patterns']));
     }
 
     /**

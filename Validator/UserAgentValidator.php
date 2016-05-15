@@ -34,7 +34,7 @@ class UserAgentValidator
      */
     public function isAllowed($userAgentHeader)
     {
-        $agent = $this->getAgenFromUserAgentHeader($userAgentHeader);
+        $agent = $this->getAgentFromUserAgentHeader($userAgentHeader);
 
         return $this->checkIfListHaveAgentAllowed($agent);
     }
@@ -56,12 +56,14 @@ class UserAgentValidator
      * @param $userAgentHeader
      * @return array
      */
-    protected function getAgenFromUserAgentHeader($userAgentHeader)
+    protected function getAgentFromUserAgentHeader($userAgentHeader)
     {
-        preg_match("/(firefox|msie|chrome|safari)[\/\s]([\d.]+)/i", $userAgentHeader, $matches);
+        $exploded = explode(' ', $userAgentHeader);
+        $agent = explode('/', $exploded[0]);
+
         return [
-            $matches[1],
-            $matches[2]
+            $agent[0],
+            $agent[1]
         ];
     }
 

@@ -15,7 +15,7 @@ use Wneto\UserAgentBundle\Validator\UserAgentValidator;
 
 class UserAgentValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    protected $userAgentHeader = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36';
+    protected $userAgentHeader = 'Mozilla/5.0';
 
     protected $configuration;
 
@@ -39,7 +39,7 @@ class UserAgentValidatorTest extends \PHPUnit_Framework_TestCase
         $userAgentValidator = new UserAgentValidator($this->parser, $compareStrategy);
         $this->assertTrue($userAgentValidator->isAllowed($this->userAgentHeader), "It's allowed");
 
-        $userAgentHeader = 'Mozilla (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36';
+        $userAgentHeader = 'Mozilla ';
         $compareStrategy = new CompareStrategy($this->parser);
         $userAgentValidator = new UserAgentValidator($this->parser, $compareStrategy);
         $this->assertFalse($userAgentValidator->isAllowed($userAgentHeader), "It's allowed");
@@ -71,14 +71,14 @@ class UserAgentValidatorTest extends \PHPUnit_Framework_TestCase
         $userAgentValidator = new UserAgentValidator($this->parser, $compareStrategy);
         $this->assertTrue($userAgentValidator->isAllowed($this->userAgentHeader), "It's allowed");
 
-        $userAgentHeader = 'Mozilla (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36';
+        $userAgentHeader = 'Mozilla ';
         $compareStrategy = new CompareStrategy($this->parser);
         $userAgentValidator = new UserAgentValidator($this->parser, $compareStrategy);
-        $this->assertTrue($userAgentValidator->isAllowed($userAgentHeader), "It's allowed");
+        $this->assertTrue($userAgentValidator->isAllowed($userAgentHeader), "It's not allowed");
 
         $mock = new ConfigurationMock();
         $configuration = $mock->getMockConfig();
-        $configuration['patterns'][0]['version'] = '4.0.0';
+        $configuration['patterns'][0]['version'] = '5.0';
         $parser = new ConfigurationParser($configuration);
         $compareStrategy = new CompareStrategy($parser);
         $userAgentValidator = new UserAgentValidator($parser, $compareStrategy);
@@ -103,14 +103,14 @@ class UserAgentValidatorTest extends \PHPUnit_Framework_TestCase
         $userAgentValidator = new UserAgentValidator($this->parser, $compareStrategy);
         $this->assertTrue($userAgentValidator->isAllowed($this->userAgentHeader), "It's allowed");
 
-        $userAgentHeader = 'Mozilla (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36';
+        $userAgentHeader = 'Mozilla ';
         $compareStrategy = new CompareStrategy($this->parser);
         $userAgentValidator = new UserAgentValidator($this->parser, $compareStrategy);
         $this->assertFalse($userAgentValidator->isAllowed($userAgentHeader), "It's allowed");
 
         $mock = new ConfigurationMock();
         $configuration = $mock->getMockConfig();
-        $configuration['patterns'][0]['version'] = '5.0.0';
+        $configuration['patterns'][0]['version'] = '6.0';
         $parser = new ConfigurationParser($configuration);
         $compareStrategy = new CompareStrategy($parser);
         $userAgentValidator = new UserAgentValidator($parser, $compareStrategy);

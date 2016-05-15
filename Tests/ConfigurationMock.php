@@ -17,8 +17,8 @@ class ConfigurationMock extends \PHPUnit_Framework_TestCase
         'patterns' => [
             [
                 'pattern' => 'Mozilla',
-                'version' => '4.0.0',
-                'operator' => '>'
+                'version' => '4.0',
+                'operator' => '>='
             ],
         ]
     ];

@@ -24,11 +24,12 @@ class CompareAllowAll extends CompareAbstract
         $allowed = true;
         foreach ($this->configuration->getPatterns() as $pattern) {
             if ($this->isAbleToCompare($pattern, $separatedAgent)) {
-                if ($this->compare($pattern, $separatedAgent)) {
+                if (!$this->compare($pattern, $separatedAgent)) {
                     $allowed = false;
                 }
             }
         }
+
         return $allowed;
     }
 

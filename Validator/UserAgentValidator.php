@@ -34,22 +34,19 @@ class UserAgentValidator
      */
     public function isAllowed($userAgentHeader)
     {
-        $agentList = $this->getAgentListFromUserAgentHeader($userAgentHeader);
+        $agent = $this->getAgenFromUserAgentHeader($userAgentHeader);
 
-        return $this->checkIfListHaveAgentAllowed($agentList);
+        return $this->checkIfListHaveAgentAllowed($agent);
     }
 
     /**
-     * @param $agentList
+     * @param $agent
      * @return bool
      */
-    protected function checkIfListHaveAgentAllowed($agentList)
+    protected function checkIfListHaveAgentAllowed($agent)
     {
-        foreach ($agentList as $agent) {
-            $separatedAgent = $this->splitAgent($agent);
-            if ($this->compareStrategy->isPatternAllowed($separatedAgent)) {
-                return true;
-            }
+        if ($this->compareStrategy->isPatternAllowed($agent)) {
+            return true;
         }
 
         return false;
@@ -59,19 +56,13 @@ class UserAgentValidator
      * @param $userAgentHeader
      * @return array
      */
-    protected function getAgentListFromUserAgentHeader($userAgentHeader)
+    protected function getAgenFromUserAgentHeader($userAgentHeader)
     {
-        return explode(' ', $userAgentHeader);
-    }
-
-    /**
-     * Split the agent in name and version
-     * @param $agent
-     * @return array
-     */
-    protected function splitAgent($agent)
-    {
-        return explode('/', $agent);
+        preg_match("/(firefox|msie|chrome|safari)[\/\s]([\d.]+)/i", $userAgentHeader, $matches);
+        return [
+            $matches[1],
+            $matches[2]
+        ];
     }
 
     /**

@@ -2,4 +2,4 @@ wneto_user_agent:
     enabled: true
     type: whitelist
     patterns:
-        - { pattern: "Mozilla", version: "4.0.0", operator: ">" }
+        - { pattern: "Mozilla", version: "4.0", operator: ">" }

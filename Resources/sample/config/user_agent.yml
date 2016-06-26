@@ -1,5 +1,6 @@
 wneto_user_agent:
     enabled: true
     type: whitelist
+    use_event_listener: true
     patterns:
         - { pattern: "Mozilla", version: "4.0", operator: ">" }

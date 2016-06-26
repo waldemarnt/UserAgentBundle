@@ -10,7 +10,7 @@ use Wneto\UserAgentBundle\Parser\ConfigurationParser;
 class UserAgentValidator
 {
     /**
-     * @var
+     * @var ConfigurationParser $configurationParser
      */
     private $configurationParser;
 
@@ -69,5 +69,10 @@ class UserAgentValidator
     public function isEnabled()
     {
         return $this->configurationParser->isEnabled();
+    }
+
+    public function useOnKernelListener()
+    {
+        return $this->configurationParser->useOnKernelListener();
     }
 }

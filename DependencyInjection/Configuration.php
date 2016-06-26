@@ -28,6 +28,10 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('type')->isRequired()->defaultValue('whitelist')->end()
             ->end();
 
+        $rootNode->children()
+            ->booleanNode('useKernelEventListener')->defaultFalse()->end()
+            ->end();
+
         $rootNode
             ->children()
                 ->arrayNode('patterns')

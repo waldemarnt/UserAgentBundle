@@ -8,3 +8,8 @@ services:
     user_agent.compare.strategy:
           class: Wneto\UserAgentBundle\Compare\CompareStrategy
           arguments: [@user_agent.parser.configuration_parser]
+    user_agent.listener.user_agent:
+          class: Wneto\UserAgentBundle\EventListener\OnKernelControllerListener
+          arguments: [@user_agent.validator.user_agent]
+          tags:
+             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController, priority: 9001 }

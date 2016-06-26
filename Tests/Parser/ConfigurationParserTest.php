@@ -10,33 +10,36 @@ namespace Wneto\UserAgentBundle\Tests\Parser;
 
 
 use Wneto\UserAgentBundle\Parser\ConfigurationParser;
+use Wneto\UserAgentBundle\Tests\ConfigurationMock;
 
 class ConfigurationParserTest extends \PHPUnit_Framework_TestCase
 {
-    protected $configuration = [
-        'validation' => true,
-        'type' => 'whitelist',
-        'patterns' => [
-            [
-                'pattern' => 'Mozilla',
-                'version' => '5.0.5',
-                'operator' => '>'
-            ]
-        ]
-    ];
+    protected $configuration;
 
+    /** @var ConfigurationParser $parser */
     protected $parser;
-
-
 
     public function setUp()
     {
+        parent::setUp();
+        $mock = new ConfigurationMock();
+        $this->configuration = $mock->getMockConfig();
         $this->parser = new ConfigurationParser($this->configuration);
+    }
+
+    public function testGetValidation()
+    {
+        $this->assertEquals($this->configuration['enabled'], $this->parser->isEnabled());
     }
 
     public function testGetType()
     {
         $this->assertEquals($this->configuration['type'], $this->parser->getType());
+    }
+
+    public function testPatterns()
+    {
+        $this->assertInstanceOf('Wneto\\UserAgentBundle\\Entity\\Pattern', $this->parser->getPatterns()[0]);
     }
 
 }

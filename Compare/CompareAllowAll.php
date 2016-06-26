@@ -21,13 +21,16 @@ class CompareAllowAll extends CompareAbstract
      */
     public function isPatternAllowed($separatedAgent)
     {
+        $allowed = true;
         foreach ($this->configuration->getPatterns() as $pattern) {
-            if (!$this->isAbleToCompare($pattern, $separatedAgent)) {
-                return $this->compare($pattern, $separatedAgent);
+            if ($this->isAbleToCompare($pattern, $separatedAgent)) {
+                if (!$this->compare($pattern, $separatedAgent)) {
+                    $allowed = false;
+                }
             }
         }
 
-        return true;
+        return $allowed;
     }
 
 }

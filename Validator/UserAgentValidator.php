@@ -10,7 +10,7 @@ use Wneto\UserAgentBundle\Parser\ConfigurationParser;
 class UserAgentValidator
 {
     /**
-     * @var
+     * @var ConfigurationParser $configurationParser
      */
     private $configurationParser;
 
@@ -34,22 +34,19 @@ class UserAgentValidator
      */
     public function isAllowed($userAgentHeader)
     {
-        $agentList = $this->getAgentListFromUserAgentHeader($userAgentHeader);
+        $agent = $this->getAgentFromUserAgentHeader($userAgentHeader);
 
-        return $this->checkIfListHaveAgentAllowed($agentList);
+        return $this->checkIfListHaveAgentAllowed($agent);
     }
 
     /**
-     * @param $agentList
+     * @param $agent
      * @return bool
      */
-    public function checkIfListHaveAgentAllowed($agentList)
+    protected function checkIfListHaveAgentAllowed($agent)
     {
-        foreach ($agentList as $agent) {
-            $separatedAgent = $this->splitAgent($agent);
-            if ($this->compareStrategy->isPatternAllowed($separatedAgent)) {
-                return true;
-            }
+        if ($this->compareStrategy->isPatternAllowed($agent)) {
+            return true;
         }
 
         return false;
@@ -59,19 +56,11 @@ class UserAgentValidator
      * @param $userAgentHeader
      * @return array
      */
-    protected function getAgentListFromUserAgentHeader($userAgentHeader)
+    protected function getAgentFromUserAgentHeader($userAgentHeader)
     {
-        return explode(' ', $userAgentHeader);
-    }
+        $agents = explode(' ', $userAgentHeader);
 
-    /**
-     * Split the agent in name and version
-     * @param $agent
-     * @return array
-     */
-    protected function splitAgent($agent)
-    {
-        return explode('/', $agent);
+        return explode('/', $agents[0]);
     }
 
     /**
@@ -80,5 +69,10 @@ class UserAgentValidator
     public function isEnabled()
     {
         return $this->configurationParser->isEnabled();
+    }
+
+    public function useOnKernelListener()
+    {
+        return $this->configurationParser->useOnKernelListener();
     }
 }

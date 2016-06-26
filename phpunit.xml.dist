@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false" colors="true" bootstrap="vendor/autoload.php" coverageHtml="html/">
+    <testsuites>
+        <testsuite name="Project Test Suite">
+            <directory>./Tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./*</directory>
+            <directory>./Resources</directory>
+            <directory>./Resources</directory>
+            <exclude>
+                <directory>./Tests</directory>
+                <directory>./DependencyInjection</directory>
+                <directory>./vendor</directory>
+                <directory>./html</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

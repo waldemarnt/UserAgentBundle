@@ -23,6 +23,11 @@ class ConfigurationParser
     private $type;
 
     /**
+     * @var String
+     */
+    private $useKernelEventListener = false;
+
+    /**
      * @boolean
      */
     private $enabled = false;
@@ -30,9 +35,10 @@ class ConfigurationParser
     public function __construct($configuration)
     {
         $this->configuration = $configuration;
-        $this->enabled = $this->configuration['validation'];
-        $this->type = $this->configuration['type'];
-        $this->patterns = $this->hydrateEntities($this->configuration['patterns']);
+        $this->setEnabled($this->configuration['enabled']);
+        $this->setType($this->configuration['type']);
+        $this->setUseKernelEventListener($this->configuration['use_event_listener']);
+        $this->setPatterns($this->hydrateEntities($this->configuration['patterns']));
     }
 
     /**
@@ -99,5 +105,29 @@ class ConfigurationParser
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return String
+     */
+    public function getUseKernelEventListener()
+    {
+        return $this->useKernelEventListener;
+    }
+
+    /**
+     * @return String
+     */
+    public function useOnKernelListener()
+    {
+        return $this->getUseKernelEventListener();
+    }
+
+    /**
+     * @param String $useKernelEventListener
+     */
+    public function setUseKernelEventListener($useKernelEventListener)
+    {
+        $this->useKernelEventListener = $useKernelEventListener;
     }
 }

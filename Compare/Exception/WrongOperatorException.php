@@ -8,9 +8,7 @@
 
 namespace Wneto\UserAgentBundle\Compare\Exception;
 
-use Symfony\Component\CssSelector\Exception\InternalErrorException;
-
-class WrongOperatorException extends InternalErrorException
+class WrongOperatorException extends \Exception
 {
 
 }

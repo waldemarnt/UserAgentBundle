@@ -37,7 +37,7 @@ class ConfigurationParser
         $this->configuration = $configuration;
         $this->setEnabled($this->configuration['enabled']);
         $this->setType($this->configuration['type']);
-        $this->setUseKernelEventListener($this->configuration['useKernelEventListener']);
+        $this->setUseKernelEventListener($this->configuration['use_event_listener']);
         $this->setPatterns($this->hydrateEntities($this->configuration['patterns']));
     }
 

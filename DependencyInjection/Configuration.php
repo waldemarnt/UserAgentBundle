@@ -29,7 +29,7 @@ class Configuration implements ConfigurationInterface
             ->end();
 
         $rootNode->children()
-            ->booleanNode('useKernelEventListener')->defaultFalse()->end()
+            ->booleanNode('use_event_listener')->defaultFalse()->end()
             ->end();
 
         $rootNode

@@ -36,6 +36,7 @@ First of all we need the configuration inside the **config.yml** file
 wneto_user_agent:
     enabled: true
     type: whitelist # blacklist or whitelist. With whitelist all request will be blocked and accept requests only from the setted patterns
+    use_event_listener: true # You can opt to use the event listener defined on the bundle or use the second option below
     patterns:
         - { pattern: "Mozilla", version: "5.0", operator: ">" }
 ```
